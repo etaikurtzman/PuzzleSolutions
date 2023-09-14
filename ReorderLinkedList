@@ -1,0 +1,31 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        """
+        dict = {}
+        curr = head
+        i = -1
+        while curr:
+            i += 1
+            dict[i] = curr
+            curr = curr.next
+        l = 0
+        h = i
+        prev = h
+        while l < h:
+            if l != 0:
+                dict[prev].next = dict[l]
+            dict[l].next = dict[h]
+            prev = h
+            l = l + 1
+            h = h - 1
+        if l == h:
+            dict[prev].next = dict[l]
+        dict[l].next = None
+            
